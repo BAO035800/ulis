@@ -1,11 +1,12 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
+import { Check } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { LANGUAGES } from "@/lib/languages";
 
 export default function OnboardingModal() {
-  const { showOnboarding, setLanguage, closeOnboarding, hasChosen } =
+  const { showOnboarding, setLanguage, closeOnboarding, hasChosen, language } =
     useLanguage();
 
   return (
@@ -36,29 +37,42 @@ export default function OnboardingModal() {
                 Bạn đang học ngôn ngữ nào?
               </h2>
               <p className="mt-2 text-sm text-slate-600 sm:text-base">
-                Chọn chuyên ngành để toàn bộ nội dung – màu sắc – đề xuất bên dưới
-                được cá nhân hoá theo bạn.
+                {hasChosen
+                  ? "Chào mừng bạn quay lại! Xác nhận lại chuyên ngành để cập nhật nội dung phù hợp."
+                  : "Chọn chuyên ngành để toàn bộ nội dung – màu sắc – đề xuất bên dưới được cá nhân hoá theo bạn."}
               </p>
 
               <div className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-4">
-                {LANGUAGES.map((lang) => (
-                  <button
-                    key={lang.key}
-                    type="button"
-                    onClick={() => setLanguage(lang.key)}
-                    className="group flex flex-col items-center gap-2 rounded-2xl border border-slate-200 bg-white p-4 text-center transition hover:-translate-y-0.5 hover:border-[var(--accent)] hover:shadow-md"
-                  >
-                    <span className="text-3xl transition group-hover:scale-110">
-                      {lang.flag}
-                    </span>
-                    <span className="text-sm font-medium text-slate-800">
-                      {lang.name}
-                    </span>
-                    <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">
-                      {lang.short}
-                    </span>
-                  </button>
-                ))}
+                {LANGUAGES.map((lang) => {
+                  const isCurrent = hasChosen && lang.key === language;
+                  return (
+                    <button
+                      key={lang.key}
+                      type="button"
+                      onClick={() => setLanguage(lang.key)}
+                      className={`group relative flex flex-col items-center gap-2 rounded-2xl border p-4 text-center transition hover:-translate-y-0.5 hover:shadow-md ${
+                        isCurrent
+                          ? "border-[var(--accent)] bg-[var(--accent-soft)]/40"
+                          : "border-slate-200 bg-white hover:border-[var(--accent)]"
+                      }`}
+                    >
+                      {isCurrent && (
+                        <span className="absolute right-2 top-2 flex h-5 w-5 items-center justify-center rounded-full bg-[var(--accent)] text-white">
+                          <Check className="h-3 w-3" strokeWidth={3} />
+                        </span>
+                      )}
+                      <span className="text-3xl transition group-hover:scale-110">
+                        {lang.flag}
+                      </span>
+                      <span className="text-sm font-medium text-slate-800">
+                        {lang.name}
+                      </span>
+                      <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">
+                        {lang.short}
+                      </span>
+                    </button>
+                  );
+                })}
               </div>
 
               {hasChosen && (

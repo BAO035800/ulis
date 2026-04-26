@@ -62,10 +62,7 @@ export default function CoreFeatures() {
     <section id="features" className="relative bg-white py-20 sm:py-24">
       <div className="mx-auto max-w-6xl px-6">
         <div className="max-w-2xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
-            Phần 3 · Tính năng cốt lõi
-          </p>
-          <h2 className="mt-2 text-3xl font-bold text-slate-900 sm:text-4xl">
+          <h2 className="text-3xl font-bold text-slate-900 sm:text-4xl">
             Bộ công cụ “dẫn đường” từng bước
           </h2>
           <p className="mt-3 text-base text-slate-600">

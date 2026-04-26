@@ -1,8 +1,23 @@
 "use client";
 
-import { ArrowRight, FileText } from "lucide-react";
+import type { ComponentType } from "react";
+import { ArrowRight, Briefcase, Code2, MailCheck } from "lucide-react";
+import {
+  BilingualEmailArt,
+  CareerJourneyArt,
+  LogicLanguageArt,
+} from "./BlogIllustrations";
 
-const POSTS = [
+type Post = {
+  tag: string;
+  title: string;
+  excerpt: string;
+  readTime: string;
+  Art: ComponentType;
+  TagIcon: ComponentType<{ className?: string }>;
+};
+
+const POSTS: Post[] = [
   {
     tag: "Chuyện nghề",
     title:
@@ -10,7 +25,8 @@ const POSTS = [
     excerpt:
       "Hành trình 6 năm từ giảng đường khoa Anh đến vị trí Operations Manager — và những kỹ năng “không-có-trong-giáo-trình” đã thay đổi cuộc chơi.",
     readTime: "8 phút đọc",
-    accent: "from-blue-500/15 to-indigo-500/10",
+    Art: CareerJourneyArt,
+    TagIcon: Briefcase,
   },
   {
     tag: "Kỹ năng",
@@ -19,7 +35,8 @@ const POSTS = [
     excerpt:
       "Học ngôn ngữ không chỉ là học từ vựng. Đây là 5 “tư duy ẩn” mà sinh viên ngữ giỏi nào cũng có — và cách biến chúng thành lợi thế nghề nghiệp.",
     readTime: "6 phút đọc",
-    accent: "from-emerald-500/15 to-teal-500/10",
+    Art: LogicLanguageArt,
+    TagIcon: Code2,
   },
   {
     tag: "Email & CV",
@@ -28,23 +45,18 @@ const POSTS = [
     excerpt:
       "Template thực chiến: xin thực tập, follow-up phỏng vấn, gửi CV, xin gia hạn deadline… Có sẵn cấu trúc Eng/JP/KR.",
     readTime: "5 phút đọc",
-    accent: "from-rose-500/15 to-orange-500/10",
+    Art: BilingualEmailArt,
+    TagIcon: MailCheck,
   },
 ];
 
 export default function BlogTeaser() {
   return (
-    <section
-      id="blog"
-      className="relative bg-slate-50 py-20 sm:py-24"
-    >
+    <section id="blog" className="relative bg-slate-50 py-20 sm:py-24">
       <div className="mx-auto max-w-6xl px-6">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div className="max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
-              Phần 5 · Không gian phát triển mở rộng
-            </p>
-            <h2 className="mt-2 text-3xl font-bold text-slate-900 sm:text-4xl">
+            <h2 className="text-3xl font-bold text-slate-900 sm:text-4xl">
               Nhật Ký Chuyện Nghề: Từ Giảng Đường Đến Công Sở
             </h2>
             <p className="mt-3 text-base leading-7 text-slate-600">
@@ -67,18 +79,17 @@ export default function BlogTeaser() {
         </div>
 
         <div className="mt-10 grid gap-5 md:grid-cols-3">
-          {POSTS.map((p) => (
+          {POSTS.map(({ Art, TagIcon, ...p }) => (
             <article
               key={p.title}
               className="group flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
             >
-              <div
-                className={`relative h-40 overflow-hidden bg-gradient-to-br ${p.accent}`}
-              >
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <FileText className="h-14 w-14 text-slate-700/30 transition group-hover:scale-110" />
+              <div className="relative h-44 overflow-hidden">
+                <div className="absolute inset-0 transition duration-500 group-hover:scale-105">
+                  <Art />
                 </div>
-                <span className="absolute left-4 top-4 rounded-full bg-white/90 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-slate-700 backdrop-blur">
+                <span className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full bg-white/95 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-slate-700 shadow-sm backdrop-blur">
+                  <TagIcon className="h-3 w-3 text-[var(--accent)]" />
                   {p.tag}
                 </span>
               </div>
@@ -89,8 +100,9 @@ export default function BlogTeaser() {
                 <p className="text-sm leading-6 text-slate-600">{p.excerpt}</p>
                 <div className="mt-auto flex items-center justify-between pt-2 text-xs text-slate-400">
                   <span>{p.readTime}</span>
-                  <span className="font-semibold text-[var(--accent)] opacity-0 transition group-hover:opacity-100">
-                    Đọc tiếp →
+                  <span className="inline-flex items-center gap-1 font-semibold text-[var(--accent)] opacity-0 transition group-hover:opacity-100">
+                    Đọc tiếp
+                    <ArrowRight className="h-3 w-3" />
                   </span>
                 </div>
               </div>

@@ -44,10 +44,7 @@ export default function TargetAudience() {
       <div className="mx-auto max-w-6xl px-6">
         <div className="grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:items-center">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
-              Phần 4 · Đối tượng
-            </p>
-            <h2 className="mt-2 text-3xl font-bold text-slate-900 sm:text-4xl">
+            <h2 className="text-3xl font-bold text-slate-900 sm:text-4xl">
               Dành cho{" "}
               <span className="text-[var(--accent)]">toàn bộ sinh viên</span>{" "}
               ngành ngôn ngữ

@@ -41,9 +41,8 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     if (stored && LANGUAGES.some((l) => l.key === stored)) {
       setLanguageState(stored);
       setHasChosen(true);
-    } else {
-      setShowOnboarding(true);
     }
+    setShowOnboarding(true);
   }, []);
 
   const setLanguage = (key: LanguageKey) => {

@@ -33,7 +33,7 @@ export default function Testimonials() {
             Phản hồi từ cộng đồng
           </p>
           <h2 className="mt-2 text-3xl font-bold text-slate-900 sm:text-4xl">
-            Họ đã “chọn đúng – đi xa” nhờ Trạm Dừng
+            Họ đã “CHỌN ĐÚNG - ĐI XA” nhờ Trạm Dừng
           </h2>
         </div>
 

@@ -21,12 +21,12 @@ export default function Roadmap() {
       <div className="mx-auto max-w-6xl px-6">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div className="max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
+            <h2 className="text-3xl font-bold text-slate-900 sm:text-4xl">
               Lộ trình mở khoá theo Khung năng lực
-            </p>
-            <h2 className="mt-2 text-3xl font-bold text-slate-900 sm:text-4xl">
-              Bạn đang ở đâu trên hành trình {theme.name}?
             </h2>
+            <p className="mt-2 text-base font-medium text-[var(--accent)]">
+              Bạn đang ở đâu trên hành trình {theme.name}?
+            </p>
             <p className="mt-3 text-base text-slate-600">
               Click vào từng <strong>Mốc</strong> để xem khung năng lực ngôn ngữ
               + kỹ năng nghề nghiệp tương ứng. Đổi chuyên ngành để cập nhật

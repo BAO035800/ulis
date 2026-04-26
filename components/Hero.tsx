@@ -61,7 +61,7 @@ export default function Hero() {
             transition={{ delay: 0.1, duration: 0.45 }}
             className="mt-5 inline-flex items-center gap-3 rounded-full bg-[var(--accent-soft)] px-4 py-2 text-sm font-semibold text-[var(--accent-ink)]"
           >
-            “Hiểu mình – Chọn đúng – Đi xa.”
+            “HIỂU MÌNH - CHỌN ĐÚNG - ĐI XA”
           </motion.p>
 
           <motion.p
