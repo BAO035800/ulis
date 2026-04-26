@@ -2,10 +2,12 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { Banknote, Brain, Lightbulb } from "lucide-react";
 import { CAREERS, type Career } from "@/lib/careers";
 
 function CareerCard({ career }: { career: Career }) {
   const [flipped, setFlipped] = useState(false);
+  const Icon = career.Icon;
 
   return (
     <div
@@ -25,7 +27,9 @@ function CareerCard({ career }: { career: Career }) {
         {/* FRONT */}
         <div className="absolute inset-0 flex flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition group-hover:shadow-md [backface-visibility:hidden]">
           <div>
-            <span className="text-3xl">{career.emoji}</span>
+            <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--accent-soft)] text-[var(--accent-ink)]">
+              <Icon className="h-5 w-5" strokeWidth={2} />
+            </span>
             <h3 className="mt-3 text-lg font-semibold text-slate-900">
               {career.title}
             </h3>
@@ -48,13 +52,13 @@ function CareerCard({ career }: { career: Career }) {
 
         {/* BACK */}
         <div className="absolute inset-0 flex flex-col rounded-2xl bg-gradient-to-br from-[var(--accent)] to-[var(--accent-ink)] p-5 text-white shadow-lg [backface-visibility:hidden] [transform:rotateY(180deg)]">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] opacity-80">
-            💰 Lương
+          <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] opacity-80">
+            <Banknote className="h-3.5 w-3.5" /> Lương
           </p>
           <p className="mt-1 text-sm font-semibold">{career.salary}</p>
 
-          <p className="mt-3 text-xs font-semibold uppercase tracking-[0.18em] opacity-80">
-            🧠 Kỹ năng bắt buộc
+          <p className="mt-3 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] opacity-80">
+            <Brain className="h-3.5 w-3.5" /> Kỹ năng bắt buộc
           </p>
           <ul className="mt-1 space-y-1 text-sm">
             {career.skills.map((skill) => (
@@ -65,8 +69,9 @@ function CareerCard({ career }: { career: Career }) {
             ))}
           </ul>
 
-          <div className="mt-auto rounded-xl bg-white/10 p-2 text-[11px] leading-snug backdrop-blur">
-            👉 {career.insight}
+          <div className="mt-auto flex items-start gap-1.5 rounded-xl bg-white/10 p-2 text-[11px] leading-snug backdrop-blur">
+            <Lightbulb className="mt-0.5 h-3.5 w-3.5 flex-shrink-0" />
+            <span>{career.insight}</span>
           </div>
         </div>
       </motion.button>

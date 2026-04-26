@@ -1,6 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
+import { ArrowRight, Map as MapIcon, Sparkles } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { LANGUAGES } from "@/lib/languages";
 
@@ -87,17 +89,19 @@ export default function Hero() {
           </motion.p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
-            <a
-              href="#mbti"
+            <Link
+              href="/mbti"
               className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-[var(--accent)]/25 transition hover:-translate-y-0.5 hover:shadow-xl"
             >
+              <Sparkles className="h-4 w-4" />
               Khám phá bản thân ngay
-              <span aria-hidden>→</span>
-            </a>
+              <ArrowRight className="h-4 w-4" />
+            </Link>
             <a
               href="#career-map"
               className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
             >
+              <MapIcon className="h-4 w-4" />
               Xem bản đồ nghề nghiệp
             </a>
           </div>

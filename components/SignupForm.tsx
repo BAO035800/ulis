@@ -2,12 +2,22 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import {
+  CheckCircle2,
+  Loader2,
+  PartyPopper,
+  Send,
+  ShieldCheck,
+} from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { LANGUAGES } from "@/lib/languages";
 
+type Status = "idle" | "submitting" | "success" | "error";
+
 export default function SignupForm() {
   const { language, setLanguage, theme } = useLanguage();
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<Status>("idle");
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -29,9 +39,33 @@ export default function SignupForm() {
         : { ...f, interests: [...f.interests, i] },
     );
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
+    setStatus("submitting");
+    setErrorMsg(null);
+    try {
+      const res = await fetch("/api/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...form, language }),
+      });
+      const data: { ok?: boolean; error?: string } = await res.json();
+      if (!res.ok || !data.ok) {
+        setStatus("error");
+        setErrorMsg(data.error ?? "Có lỗi xảy ra. Vui lòng thử lại.");
+        return;
+      }
+      setStatus("success");
+    } catch {
+      setStatus("error");
+      setErrorMsg("Không kết nối được tới máy chủ. Vui lòng thử lại.");
+    }
+  };
+
+  const reset = () => {
+    setStatus("idle");
+    setErrorMsg(null);
+    setForm({ name: "", email: "", year: "Năm 1", interests: [] });
   };
 
   return (
@@ -71,9 +105,7 @@ export default function SignupForm() {
               "Mời sớm vào workshop offline tại ULIS",
             ].map((item) => (
               <li key={item} className="flex items-center gap-2">
-                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/15 text-[11px]">
-                  ✓
-                </span>
+                <CheckCircle2 className="h-4 w-4 flex-shrink-0 opacity-90" />
                 {item}
               </li>
             ))}
@@ -87,22 +119,19 @@ export default function SignupForm() {
           viewport={{ once: true }}
           className="rounded-3xl bg-white/95 p-6 shadow-2xl backdrop-blur sm:p-8"
         >
-          {submitted ? (
+          {status === "success" ? (
             <div className="py-8 text-center">
-              <span className="text-4xl">🎉</span>
+              <PartyPopper className="mx-auto h-10 w-10 text-[var(--accent)]" />
               <h3 className="mt-3 text-xl font-semibold text-slate-900">
                 Cảm ơn {form.name || "bạn"}!
               </h3>
               <p className="mt-2 text-sm text-slate-600">
                 Tài liệu cá nhân hoá cho {theme.name} sẽ được gửi đến{" "}
-                <strong>{form.email || "email của bạn"}</strong> trong 24h.
+                <strong>{form.email}</strong> trong 24h.
               </p>
               <button
                 type="button"
-                onClick={() => {
-                  setSubmitted(false);
-                  setForm({ name: "", email: "", year: "Năm 1", interests: [] });
-                }}
+                onClick={reset}
                 className="mt-6 rounded-full border border-slate-300 px-5 py-2 text-sm font-medium text-slate-600 hover:border-slate-500"
               >
                 Đăng ký người khác
@@ -214,15 +243,32 @@ export default function SignupForm() {
                   </div>
                 </div>
 
+                {status === "error" && errorMsg && (
+                  <p className="rounded-lg bg-rose-50 px-3 py-2 text-xs font-medium text-rose-700">
+                    {errorMsg}
+                  </p>
+                )}
+
                 <button
                   type="submit"
-                  className="mt-2 w-full rounded-full bg-[var(--accent)] py-3 text-sm font-semibold text-white shadow-lg shadow-[var(--accent)]/30 transition hover:opacity-95"
+                  disabled={status === "submitting"}
+                  className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[var(--accent)] py-3 text-sm font-semibold text-white shadow-lg shadow-[var(--accent)]/30 transition hover:opacity-95 disabled:opacity-70"
                 >
-                  Gửi đăng ký · Nhận tài liệu ngay
+                  {status === "submitting" ? (
+                    <>
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                      Đang gửi…
+                    </>
+                  ) : (
+                    <>
+                      <Send className="h-4 w-4" />
+                      Gửi đăng ký · Nhận tài liệu ngay
+                    </>
+                  )}
                 </button>
-                <p className="text-center text-[11px] text-slate-400">
-                  Bằng cách đăng ký, bạn đồng ý với chính sách bảo mật của Trạm
-                  Dừng Hướng Nghiệp.
+                <p className="flex items-center justify-center gap-1 text-center text-[11px] text-slate-400">
+                  <ShieldCheck className="h-3 w-3" /> Bằng cách đăng ký, bạn đồng
+                  ý với chính sách bảo mật của Trạm Dừng Hướng Nghiệp.
                 </p>
               </div>
             </>

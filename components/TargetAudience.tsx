@@ -1,23 +1,38 @@
 "use client";
 
-const PROFILES = [
+import {
+  Compass,
+  GraduationCap,
+  Sprout,
+  Target,
+  Check,
+  type LucideIcon,
+} from "lucide-react";
+
+type Profile = {
+  Icon: LucideIcon;
+  title: string;
+  desc: string;
+};
+
+const PROFILES: Profile[] = [
   {
-    icon: "🌱",
+    Icon: Sprout,
     title: "Tân sinh viên ngoại ngữ",
     desc: "Năm 1 – 2, đang mông lung tìm hướng đi phù hợp với tính cách và năng lực thật của mình.",
   },
   {
-    icon: "🎯",
+    Icon: Target,
     title: "Sinh viên đã có nền tảng",
     desc: "Năm 3 – 4 hoặc đã có chứng chỉ, cần lộ trình kỹ năng nghề & lộ trình thi chứng chỉ chuyên sâu.",
   },
   {
-    icon: "🌉",
+    Icon: Compass,
     title: "Sinh viên muốn rẽ ngang",
     desc: "Học ngôn ngữ nhưng quan tâm đến IT Comtor, Sourcing, Project Coordinator, Localization…",
   },
   {
-    icon: "🧭",
+    Icon: GraduationCap,
     title: "Sinh viên năm cuối / mới ra trường",
     desc: "Cần định vị bản thân, hoàn thiện hồ sơ song ngữ và chuẩn bị phỏng vấn doanh nghiệp.",
   },
@@ -33,7 +48,8 @@ export default function TargetAudience() {
               Phần 4 · Đối tượng
             </p>
             <h2 className="mt-2 text-3xl font-bold text-slate-900 sm:text-4xl">
-              Dành cho <span className="text-[var(--accent)]">toàn bộ sinh viên</span>{" "}
+              Dành cho{" "}
+              <span className="text-[var(--accent)]">toàn bộ sinh viên</span>{" "}
               ngành ngôn ngữ
             </h2>
             <p className="mt-4 text-base leading-7 text-slate-600">
@@ -52,8 +68,8 @@ export default function TargetAudience() {
                   key={item}
                   className="flex items-center gap-2 text-sm font-medium text-slate-700"
                 >
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[var(--accent-soft)] text-[10px] text-[var(--accent-ink)]">
-                    ✓
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[var(--accent-soft)] text-[var(--accent-ink)]">
+                    <Check className="h-3 w-3" strokeWidth={3} />
                   </span>
                   {item}
                 </li>
@@ -62,12 +78,14 @@ export default function TargetAudience() {
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">
-            {PROFILES.map((p) => (
+            {PROFILES.map(({ Icon, ...p }) => (
               <div
                 key={p.title}
                 className="group rounded-2xl border border-slate-200 bg-white p-5 transition hover:-translate-y-0.5 hover:border-[var(--accent)] hover:shadow-md"
               >
-                <span className="text-3xl">{p.icon}</span>
+                <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--accent-soft)] text-[var(--accent-ink)]">
+                  <Icon className="h-5 w-5" />
+                </span>
                 <h3 className="mt-3 text-base font-semibold text-slate-900">
                   {p.title}
                 </h3>

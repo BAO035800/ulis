@@ -1,10 +1,25 @@
 "use client";
 
 import { motion } from "framer-motion";
+import {
+  BookMarked,
+  Brain,
+  KeyRound,
+  Map as MapIcon,
+  type LucideIcon,
+} from "lucide-react";
 
-const FEATURES = [
+type Feature = {
+  Icon: LucideIcon;
+  title: string;
+  desc: string;
+  bullets: string[];
+  highlight?: boolean;
+};
+
+const FEATURES: Feature[] = [
   {
-    icon: "📖",
+    Icon: BookMarked,
     title: "Từ điển nghề nghiệp đặc thù",
     desc: "Trung tâm dữ liệu thu nhỏ — thông tin chính thống về ngành học, lộ trình thăng tiến, mức lương và cơ hội việc làm cho từng khối ngôn ngữ (Anh, Hàn, Trung, Nhật, Đức, Pháp, Nga, Ả Rập…).",
     bullets: [
@@ -14,7 +29,7 @@ const FEATURES = [
     ],
   },
   {
-    icon: "🗺️",
+    Icon: MapIcon,
     title: "Lộ trình & Checklist",
     desc: "Xác lập mục tiêu và lập kế hoạch chi tiết theo từng học kỳ trong suốt 4 năm học, đi kèm checklist thực tế về kỹ năng và chứng chỉ cần trau dồi.",
     bullets: [
@@ -24,7 +39,7 @@ const FEATURES = [
     ],
   },
   {
-    icon: "🔓",
+    Icon: KeyRound,
     title: "Lộ trình “Mở khoá” theo Khung năng lực",
     desc: "Dành cho sinh viên đã có nền tảng. Thiết kế theo Khung năng lực (A1–C2 / N5–N1 / TOPIK 1–6 / HSK 1–6) thay vì theo thời gian. Bạn đang ở đâu, sẽ được đề xuất bước kế tiếp.",
     bullets: [
@@ -35,7 +50,7 @@ const FEATURES = [
     highlight: true,
   },
   {
-    icon: "🧠",
+    Icon: Brain,
     title: "Trắc nghiệm MBTI hướng nghiệp",
     desc: "Phiên bản MBTI rút gọn dành riêng cho sinh viên ngôn ngữ. Kết quả sẽ map trực tiếp vào nhóm nghề phù hợp trong sơ đồ Career Mapping.",
     bullets: ["~5 phút", "Kết nối với Career Map", "Lưu hồ sơ cá nhân"],
@@ -60,7 +75,7 @@ export default function CoreFeatures() {
         </div>
 
         <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-          {FEATURES.map((f, idx) => (
+          {FEATURES.map(({ Icon, ...f }, idx) => (
             <motion.article
               key={f.title}
               initial={{ opacity: 0, y: 12 }}
@@ -78,7 +93,9 @@ export default function CoreFeatures() {
                   Mới
                 </span>
               )}
-              <span className="text-3xl">{f.icon}</span>
+              <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--accent-soft)] text-[var(--accent-ink)]">
+                <Icon className="h-5 w-5" />
+              </span>
               <h3 className="text-lg font-semibold text-slate-900">{f.title}</h3>
               <p className="text-sm leading-6 text-slate-600">{f.desc}</p>
               <ul className="mt-auto space-y-1.5">

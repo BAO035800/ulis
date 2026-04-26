@@ -1,9 +1,33 @@
 "use client";
 
+import Link from "next/link";
+import { QRCodeSVG } from "qrcode.react";
+import {
+  ArrowRight,
+  Briefcase,
+  Camera,
+  FileBadge,
+  Mail,
+  MapPin,
+  MessageSquare,
+  Music2,
+  Phone,
+  PlaySquare,
+} from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+
+const COMMUNITY_URL = "https://tramdung.vn/community";
 
 export default function Footer() {
   const { theme } = useLanguage();
+
+  const socials = [
+    { name: "Facebook", Icon: MessageSquare, href: "#" },
+    { name: "Instagram", Icon: Camera, href: "#" },
+    { name: "TikTok", Icon: Music2, href: "#" },
+    { name: "YouTube", Icon: PlaySquare, href: "#" },
+    { name: "LinkedIn", Icon: Briefcase, href: "#" },
+  ];
 
   return (
     <footer className="bg-slate-950 text-slate-200">
@@ -19,16 +43,18 @@ export default function Footer() {
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
+            <Link
+              href="/mbti"
+              className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[var(--accent)]/30 hover:opacity-95"
+            >
+              Làm MBTI ngay
+              <ArrowRight className="h-4 w-4" />
+            </Link>
             <a
               href="#signup"
-              className="rounded-full bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[var(--accent)]/30 hover:opacity-95"
+              className="inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-2.5 text-sm font-semibold text-white hover:border-white/60"
             >
-              Làm MBTI ngay →
-            </a>
-            <a
-              href="#signup"
-              className="rounded-full border border-white/20 px-5 py-2.5 text-sm font-semibold text-white hover:border-white/60"
-            >
+              <FileBadge className="h-4 w-4" />
               Nhận template CV song ngữ
             </a>
           </div>
@@ -59,20 +85,14 @@ export default function Footer() {
           </p>
 
           <div className="mt-5 flex items-center gap-3">
-            {[
-              { name: "Facebook", icon: "f" },
-              { name: "Instagram", icon: "ig" },
-              { name: "TikTok", icon: "tt" },
-              { name: "YouTube", icon: "yt" },
-              { name: "LinkedIn", icon: "in" },
-            ].map((s) => (
+            {socials.map(({ name, Icon, href }) => (
               <a
-                key={s.name}
-                href="#"
-                aria-label={s.name}
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-xs font-semibold text-slate-300 transition hover:border-[var(--accent)] hover:text-white"
+                key={name}
+                href={href}
+                aria-label={name}
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-slate-300 transition hover:border-[var(--accent)] hover:text-white"
               >
-                {s.icon}
+                <Icon className="h-4 w-4" />
               </a>
             ))}
           </div>
@@ -88,12 +108,10 @@ export default function Footer() {
               ["#features", "Tính năng"],
               ["#roadmap", "Lộ trình"],
               ["#blog", "Blog Chuyện nghề"],
+              ["/mbti", "Bài test MBTI"],
             ].map(([href, label]) => (
               <li key={href}>
-                <a
-                  href={href}
-                  className="text-slate-300 hover:text-white"
-                >
+                <a href={href} className="text-slate-300 hover:text-white">
                   {label}
                 </a>
               </li>
@@ -105,25 +123,31 @@ export default function Footer() {
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
             Liên hệ
           </p>
-          <ul className="mt-3 space-y-2 text-sm text-slate-300">
-            <li>
-              <span className="block text-xs text-slate-500">Email</span>
-              <a
-                href="mailto:hello@tramdung.vn"
-                className="hover:text-white"
-              >
-                hello@tramdung.vn
-              </a>
+          <ul className="mt-3 space-y-3 text-sm text-slate-300">
+            <li className="flex items-start gap-2">
+              <Mail className="mt-0.5 h-4 w-4 flex-shrink-0 text-slate-400" />
+              <span>
+                <span className="block text-xs text-slate-500">Email</span>
+                <a href="mailto:hello@tramdung.vn" className="hover:text-white">
+                  hello@tramdung.vn
+                </a>
+              </span>
             </li>
-            <li>
-              <span className="block text-xs text-slate-500">Hotline</span>
-              <a href="tel:+842466668888" className="hover:text-white">
-                +84 24 6666 8888
-              </a>
+            <li className="flex items-start gap-2">
+              <Phone className="mt-0.5 h-4 w-4 flex-shrink-0 text-slate-400" />
+              <span>
+                <span className="block text-xs text-slate-500">Hotline</span>
+                <a href="tel:+842466668888" className="hover:text-white">
+                  +84 24 6666 8888
+                </a>
+              </span>
             </li>
-            <li>
-              <span className="block text-xs text-slate-500">Địa chỉ</span>
-              <span>ULIS – ĐHQGHN, Phạm Văn Đồng, Hà Nội</span>
+            <li className="flex items-start gap-2">
+              <MapPin className="mt-0.5 h-4 w-4 flex-shrink-0 text-slate-400" />
+              <span>
+                <span className="block text-xs text-slate-500">Địa chỉ</span>
+                <span>ULIS – ĐHQGHN, Phạm Văn Đồng, Hà Nội</span>
+              </span>
             </li>
           </ul>
         </div>
@@ -133,28 +157,14 @@ export default function Footer() {
             Cộng đồng
           </p>
           <div className="mt-3 flex items-start gap-3 rounded-2xl bg-white/5 p-3">
-            <div
-              aria-hidden
-              className="flex h-20 w-20 flex-shrink-0 items-center justify-center rounded-lg bg-white p-2"
-            >
-              {/* Placeholder QR — pattern grid */}
-              <div
-                className="grid h-full w-full grid-cols-7 gap-px rounded-sm"
-                style={{ background: "#0f172a" }}
-              >
-                {Array.from({ length: 49 }).map((_, i) => (
-                  <span
-                    key={i}
-                    style={{
-                      background:
-                        // deterministic pseudo-random pattern so it looks like a QR
-                        (i * 7 + Math.floor(i / 3)) % 3 === 0
-                          ? "#ffffff"
-                          : "#0f172a",
-                    }}
-                  />
-                ))}
-              </div>
+            <div className="flex h-24 w-24 flex-shrink-0 items-center justify-center rounded-lg bg-white p-1.5">
+              <QRCodeSVG
+                value={COMMUNITY_URL}
+                size={84}
+                level="M"
+                bgColor="#ffffff"
+                fgColor="#0f172a"
+              />
             </div>
             <div>
               <p className="text-sm font-semibold text-white">
@@ -164,6 +174,12 @@ export default function Footer() {
                 Group Zalo / Facebook cho dân chuyên ngữ — chia sẻ tài liệu &
                 jobs hằng tuần.
               </p>
+              <a
+                href={COMMUNITY_URL}
+                className="mt-2 inline-flex text-[11px] font-semibold text-[var(--accent)] hover:underline"
+              >
+                tramdung.vn/community
+              </a>
             </div>
           </div>
         </div>
