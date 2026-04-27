@@ -3,8 +3,9 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Banknote, Brain, Lightbulb, MousePointerClick } from "lucide-react";
-import { CAREERS, type Career } from "@/lib/careers";
+import { CAREERS, SALARY_MAX, type Career } from "@/lib/careers";
 import { useLanguage } from "@/context/LanguageContext";
+import Flag from "./Flag";
 
 // SVG canvas: 1000 x 640. Coords are in viewBox units.
 const HUB = { x: 500, y: 320 };
@@ -109,6 +110,37 @@ function DetailPanel({ career }: { career: Career | null }) {
               <Banknote className="h-3.5 w-3.5" /> Lương
             </p>
             <p className="mt-1.5 text-sm font-semibold text-slate-900">
+              <span className="text-lg">{career.salaryRange.low}</span>
+              <span className="text-slate-500"> – </span>
+              <span className="text-lg">{career.salaryRange.high}</span>
+              <span className="ml-1 text-xs font-medium text-slate-500">
+                triệu/tháng
+              </span>
+            </p>
+            {/* Salary range bar */}
+            <div className="mt-2.5">
+              <div className="relative h-2 w-full overflow-hidden rounded-full bg-slate-100">
+                <motion.div
+                  initial={{ width: 0, opacity: 0 }}
+                  animate={{
+                    width: `${(career.salaryRange.high / SALARY_MAX) * 100}%`,
+                    opacity: 1,
+                  }}
+                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                  className="absolute left-0 top-0 h-full rounded-full bg-gradient-to-r from-[var(--accent-soft)] to-[var(--accent)]"
+                  style={{
+                    marginLeft: `${(career.salaryRange.low / SALARY_MAX) * 100}%`,
+                    width: `${((career.salaryRange.high - career.salaryRange.low) / SALARY_MAX) * 100}%`,
+                  }}
+                />
+              </div>
+              <div className="mt-1 flex justify-between text-[9px] font-semibold uppercase tracking-wider text-slate-400">
+                <span>0</span>
+                <span>{Math.round(SALARY_MAX / 2)}tr</span>
+                <span>{SALARY_MAX}tr+</span>
+              </div>
+            </div>
+            <p className="mt-1.5 text-[10px] leading-snug text-slate-500">
               {career.salary}
             </p>
           </div>
@@ -231,8 +263,13 @@ export default function CareerMap() {
                   background: `radial-gradient(circle at 30% 30%, ${theme.accent}, ${theme.accentInk})`,
                 }}
               >
-                <span className="text-3xl">{theme.flag}</span>
-                <p className="mt-1 text-xs font-bold uppercase tracking-wider">
+                <Flag
+                  countryCode={theme.countryCode}
+                  size="lg"
+                  alt={theme.name}
+                  className="ring-2 ring-white/40"
+                />
+                <p className="mt-2 text-xs font-bold uppercase tracking-wider">
                   Sinh viên
                 </p>
                 <p className="text-[10px] font-semibold opacity-90">

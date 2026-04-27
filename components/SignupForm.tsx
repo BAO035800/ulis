@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { LANGUAGES } from "@/lib/languages";
+import Flag from "./Flag";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -202,19 +203,46 @@ export default function SignupForm() {
                     <label className="text-xs font-semibold uppercase tracking-wider text-slate-600">
                       Ngôn ngữ
                     </label>
-                    <select
-                      value={language}
-                      onChange={(e) =>
-                        setLanguage(e.target.value as typeof language)
-                      }
-                      className="mt-1 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-900 outline-none focus:border-[var(--accent)]"
-                    >
-                      {LANGUAGES.map((l) => (
-                        <option key={l.key} value={l.key}>
-                          {l.flag} {l.name}
-                        </option>
-                      ))}
-                    </select>
+                    <div className="mt-1 flex h-[42px] items-center rounded-xl border border-slate-200 bg-white px-3 text-sm text-slate-900">
+                      <Flag
+                        countryCode={theme.countryCode}
+                        size="sm"
+                        alt={theme.name}
+                      />
+                      <span className="ml-2 truncate font-medium">
+                        {theme.name}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="text-xs font-semibold uppercase tracking-wider text-slate-600">
+                    Đổi ngôn ngữ
+                  </label>
+                  <div className="mt-2 flex flex-wrap gap-1.5">
+                    {LANGUAGES.map((l) => {
+                      const active = l.key === language;
+                      return (
+                        <button
+                          key={l.key}
+                          type="button"
+                          onClick={() => setLanguage(l.key)}
+                          className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium transition ${
+                            active
+                              ? "border-[var(--accent)] bg-[var(--accent)] text-white"
+                              : "border-slate-200 bg-white text-slate-600 hover:border-slate-400"
+                          }`}
+                        >
+                          <Flag
+                            countryCode={l.countryCode}
+                            size="xs"
+                            alt={l.name}
+                          />
+                          {l.short}
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
 

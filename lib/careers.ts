@@ -17,9 +17,14 @@ export type Career = {
   title: string;
   Icon: LucideIcon;
   salary: string;
+  /** Salary range in millions VND/month for visual bar comparison */
+  salaryRange: { low: number; high: number };
   skills: string[];
   insight: string;
 };
+
+/** Highest salary cap among all careers, used to scale the salary bar */
+export const SALARY_MAX = 70;
 
 export const CAREERS: Career[] = [
   {
@@ -28,6 +33,7 @@ export const CAREERS: Career[] = [
     title: "Biên dịch viên",
     Icon: BookOpen,
     salary: "10 – 25 triệu/tháng (theo dự án + công ty)",
+    salaryRange: { low: 10, high: 25 },
     skills: [
       "CAT tools (Trados, MemoQ)",
       "Văn phong & ngữ pháp chuẩn",
@@ -41,6 +47,7 @@ export const CAREERS: Career[] = [
     title: "Phiên dịch Cabin",
     Icon: Headphones,
     salary: "Project-based, cao hơn biên dịch 1.5–3× (hội nghị quốc tế)",
+    salaryRange: { low: 20, high: 60 },
     skills: [
       "Shadowing + note-taking",
       "Xử lý real-time (0 latency)",
@@ -54,6 +61,7 @@ export const CAREERS: Career[] = [
     title: "Giảng viên ngoại ngữ",
     Icon: Presentation,
     salary: "15 – 40 triệu/tháng (TT vs ĐH)",
+    salaryRange: { low: 15, high: 40 },
     skills: ["Sư phạm (pedagogy)", "Thiết kế giáo trình", "Public speaking"],
     insight: "Lương tăng mạnh nếu có TESOL/CELTA hoặc dạy lớp IELTS 7.5+.",
   },
@@ -63,6 +71,7 @@ export const CAREERS: Career[] = [
     title: "IT Comtor",
     Icon: Laptop,
     salary: "15 – 70 triệu/tháng (theo level IT)",
+    salaryRange: { low: 15, high: 70 },
     skills: [
       "Tiếng Nhật N2–N1",
       "Đọc tài liệu kỹ thuật (spec, API)",
@@ -77,6 +86,7 @@ export const CAREERS: Career[] = [
     title: "Xuất nhập khẩu / Sourcing",
     Icon: Package,
     salary: "12 – 30 triệu/tháng",
+    salaryRange: { low: 12, high: 30 },
     skills: ["Incoterms (FOB, CIF…)", "Đàm phán quốc tế", "Tiếng Anh thương mại"],
     insight: "Business-oriented, không chỉ ngôn ngữ.",
   },
@@ -86,6 +96,7 @@ export const CAREERS: Career[] = [
     title: "Điều phối dự án quốc tế",
     Icon: Globe2,
     salary: "11.9 – 23.8 triệu/tháng (range phổ biến)",
+    salaryRange: { low: 12, high: 24 },
     skills: [
       "Project management (Agile, Scrum)",
       "Giao tiếp đa quốc gia",
@@ -99,6 +110,7 @@ export const CAREERS: Career[] = [
     title: "Marketing / Localization",
     Icon: Megaphone,
     salary: "12 – 35 triệu/tháng",
+    salaryRange: { low: 12, high: 35 },
     skills: [
       "Content + SEO",
       "Cultural adaptation",

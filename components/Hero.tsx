@@ -1,41 +1,65 @@
 "use client";
 
+import { useRef } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Map as MapIcon, Sparkles } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { LANGUAGES } from "@/lib/languages";
+import HeroScene from "./HeroScene";
+import Flag from "./Flag";
 
 export default function Hero() {
   const { theme, setLanguage, language } = useLanguage();
 
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+
+  // Two blobs drift in opposite directions as user scrolls
+  const blobAY = useTransform(scrollYProgress, [0, 1], [0, -120]);
+  const blobAScale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
+  const blobBY = useTransform(scrollYProgress, [0, 1], [0, 80]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+
   return (
     <section
       id="hero"
+      ref={ref}
       className="relative overflow-hidden pt-24 pb-20 sm:pt-28 sm:pb-28"
       style={{
         background: `radial-gradient(circle at top right, ${theme.accentSoft} 0%, transparent 55%), linear-gradient(180deg, #ffffff 0%, #fafafa 100%)`,
       }}
     >
+      {/* Parallax blobs */}
       <div className="pointer-events-none absolute inset-0">
-        <div
-          className="absolute -top-24 -left-24 h-96 w-96 rounded-full opacity-40 blur-3xl"
-          style={{ background: theme.accentSoft }}
+        <motion.div
+          style={{ y: blobAY, scale: blobAScale, background: theme.accentSoft }}
+          className="absolute -top-24 -left-24 h-96 w-96 rounded-full opacity-50 blur-3xl"
         />
-        <div
+        <motion.div
+          style={{ y: blobBY, background: theme.accent }}
           className="absolute bottom-0 right-0 h-72 w-72 rounded-full opacity-30 blur-3xl"
-          style={{ background: theme.accent }}
+        />
+        <motion.div
+          style={{ y: blobAY, background: theme.accent }}
+          className="absolute right-1/3 top-40 h-40 w-40 rounded-full opacity-15 blur-3xl"
         />
       </div>
 
-      <div className="relative mx-auto grid max-w-6xl gap-12 px-6 lg:grid-cols-[1.15fr_1fr] lg:items-center">
+      <motion.div
+        style={{ opacity: heroOpacity }}
+        className="relative mx-auto grid max-w-6xl gap-12 px-6 lg:grid-cols-[1.15fr_1fr] lg:items-center"
+      >
         <div>
           <motion.span
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             className="inline-flex items-center gap-2 rounded-full border border-[var(--accent)]/30 bg-white/80 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--accent-ink)] shadow-sm"
           >
-            <span>{theme.flag}</span>
+            <Flag countryCode={theme.countryCode} size="xs" alt={theme.name} />
             Cá nhân hoá theo {theme.name}
           </motion.span>
 
@@ -49,7 +73,7 @@ export default function Hero() {
             Trạm Dừng{" "}
             <span className="text-[var(--accent)]">Hướng Nghiệp</span>
             <br />
-            <span className="text-slate-600 text-2xl font-medium sm:text-3xl">
+            <span className="text-2xl font-medium text-slate-600 sm:text-3xl">
               Nơi bắt đầu hành trình sự nghiệp của bạn.
             </span>
           </motion.h1>
@@ -82,7 +106,9 @@ export default function Hero() {
             transition={{ delay: 0.2 }}
             className="mt-3 text-sm text-slate-500"
           >
-            <span className="font-semibold text-slate-700">{theme.heroTagline}</span>{" "}
+            <span className="font-semibold text-slate-700">
+              {theme.heroTagline}
+            </span>{" "}
             <span className="block text-xs uppercase tracking-wider text-[var(--accent)]">
               {theme.heroHighlight}
             </span>
@@ -117,13 +143,13 @@ export default function Hero() {
                   key={l.key}
                   type="button"
                   onClick={() => setLanguage(l.key)}
-                  className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-xs font-medium transition ${
+                  className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium transition ${
                     active
                       ? "border-[var(--accent)] bg-[var(--accent)] text-white"
                       : "border-slate-200 bg-white text-slate-600 hover:border-slate-400"
                   }`}
                 >
-                  <span>{l.flag}</span>
+                  <Flag countryCode={l.countryCode} size="xs" alt={l.name} />
                   {l.short}
                 </button>
               );
@@ -131,70 +157,8 @@ export default function Hero() {
           </div>
         </div>
 
-        <motion.div
-          key={`art-${language}`}
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-          className="relative mx-auto w-full max-w-md"
-        >
-          <div
-            className="relative overflow-hidden rounded-[2rem] border border-white/60 bg-white/80 p-6 shadow-xl backdrop-blur"
-            style={{ boxShadow: `0 30px 60px -25px ${theme.accent}55` }}
-          >
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--accent-soft)] text-lg">
-                  {theme.flag}
-                </span>
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-                    Hồ sơ cá nhân hoá
-                  </p>
-                  <p className="text-sm font-semibold text-slate-800">
-                    {theme.name}
-                  </p>
-                </div>
-              </div>
-              <span className="rounded-full bg-[var(--accent-soft)] px-2 py-1 text-[10px] font-semibold text-[var(--accent-ink)]">
-                LIVE
-              </span>
-            </div>
-
-            <div className="mt-5 space-y-3">
-              {[
-                { label: "MBTI", value: "Sắp khám phá" },
-                { label: "Mốc hiện tại", value: "Đang khảo sát" },
-                {
-                  label: "Mục tiêu nghề",
-                  value: theme.heroHighlight.split(" · ")[1] ?? "—",
-                },
-              ].map((row) => (
-                <div
-                  key={row.label}
-                  className="flex items-center justify-between rounded-xl bg-slate-50 px-4 py-3"
-                >
-                  <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">
-                    {row.label}
-                  </span>
-                  <span className="text-sm font-medium text-slate-800">
-                    {row.value}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-5 rounded-2xl bg-gradient-to-br from-[var(--accent)] to-[var(--accent-ink)] p-4 text-white">
-              <p className="text-xs uppercase tracking-wider opacity-80">
-                Gợi ý bước tiếp theo
-              </p>
-              <p className="mt-1 text-sm font-semibold">
-                Làm bài MBTI 5 phút → mở khoá lộ trình {theme.short}.
-              </p>
-            </div>
-          </div>
-        </motion.div>
-      </div>
+        <HeroScene />
+      </motion.div>
     </section>
   );
 }

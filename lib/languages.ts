@@ -11,7 +11,10 @@ export type LanguageKey =
 export type LanguageTheme = {
   key: LanguageKey;
   name: string;
+  /** Unicode flag emoji (fallback) */
   flag: string;
+  /** ISO 3166-1 alpha-2 country code for flagcdn image */
+  countryCode: string;
   short: string;
   accent: string;
   accentSoft: string;
@@ -25,6 +28,7 @@ export const LANGUAGES: LanguageTheme[] = [
     key: "en",
     name: "Tiếng Anh",
     flag: "🇬🇧",
+    countryCode: "gb",
     short: "EN",
     accent: "#1d4ed8",
     accentSoft: "#dbeafe",
@@ -36,6 +40,7 @@ export const LANGUAGES: LanguageTheme[] = [
     key: "ja",
     name: "Tiếng Nhật",
     flag: "🇯🇵",
+    countryCode: "jp",
     short: "JP",
     accent: "#e11d48",
     accentSoft: "#ffe4e6",
@@ -47,6 +52,7 @@ export const LANGUAGES: LanguageTheme[] = [
     key: "ko",
     name: "Tiếng Hàn",
     flag: "🇰🇷",
+    countryCode: "kr",
     short: "KR",
     accent: "#7c3aed",
     accentSoft: "#ede9fe",
@@ -58,6 +64,7 @@ export const LANGUAGES: LanguageTheme[] = [
     key: "zh",
     name: "Tiếng Trung",
     flag: "🇨🇳",
+    countryCode: "cn",
     short: "ZH",
     accent: "#dc2626",
     accentSoft: "#fee2e2",
@@ -69,6 +76,7 @@ export const LANGUAGES: LanguageTheme[] = [
     key: "de",
     name: "Tiếng Đức",
     flag: "🇩🇪",
+    countryCode: "de",
     short: "DE",
     accent: "#0f766e",
     accentSoft: "#ccfbf1",
@@ -80,6 +88,7 @@ export const LANGUAGES: LanguageTheme[] = [
     key: "fr",
     name: "Tiếng Pháp",
     flag: "🇫🇷",
+    countryCode: "fr",
     short: "FR",
     accent: "#2563eb",
     accentSoft: "#dbeafe",
@@ -91,6 +100,7 @@ export const LANGUAGES: LanguageTheme[] = [
     key: "ru",
     name: "Tiếng Nga",
     flag: "🇷🇺",
+    countryCode: "ru",
     short: "RU",
     accent: "#0ea5e9",
     accentSoft: "#e0f2fe",
@@ -102,6 +112,7 @@ export const LANGUAGES: LanguageTheme[] = [
     key: "ar",
     name: "Tiếng Ả Rập",
     flag: "🇸🇦",
+    countryCode: "sa",
     short: "AR",
     accent: "#16a34a",
     accentSoft: "#dcfce7",

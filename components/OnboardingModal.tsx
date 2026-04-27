@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Check } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { LANGUAGES } from "@/lib/languages";
+import Flag from "./Flag";
 
 export default function OnboardingModal() {
   const { showOnboarding, setLanguage, closeOnboarding, hasChosen, language } =
@@ -61,8 +62,12 @@ export default function OnboardingModal() {
                           <Check className="h-3 w-3" strokeWidth={3} />
                         </span>
                       )}
-                      <span className="text-3xl transition group-hover:scale-110">
-                        {lang.flag}
+                      <span className="overflow-hidden rounded-md transition group-hover:scale-110">
+                        <Flag
+                          countryCode={lang.countryCode}
+                          alt={lang.name}
+                          size="lg"
+                        />
                       </span>
                       <span className="text-sm font-medium text-slate-800">
                         {lang.name}

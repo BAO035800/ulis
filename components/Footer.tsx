@@ -151,32 +151,19 @@ export default function Footer() {
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
             Cộng đồng
           </p>
-          <div className="mt-3 flex items-start gap-3 rounded-2xl bg-white/5 p-3">
-            <div className="flex h-24 w-24 flex-shrink-0 items-center justify-center rounded-lg bg-white p-1.5">
-              <QRCodeSVG
-                value={COMMUNITY_URL}
-                size={84}
-                level="M"
-                bgColor="#ffffff"
-                fgColor="#0f172a"
-              />
-            </div>
-            <div>
-              <p className="text-sm font-semibold text-white">
-                Quét QR tham gia
-              </p>
-              <p className="mt-1 text-xs text-slate-400">
-                Group Zalo / Facebook cho dân chuyên ngữ — chia sẻ tài liệu &
-                jobs hằng tuần.
-              </p>
-              <a
-                href={COMMUNITY_URL}
-                className="mt-2 inline-flex text-[11px] font-semibold text-[var(--accent)] hover:underline"
-              >
-                tramdung.vn/community
-              </a>
-            </div>
-          </div>
+          <a
+            href={COMMUNITY_URL}
+            aria-label="Quét QR tham gia cộng đồng"
+            className="mt-3 inline-flex items-center justify-center rounded-xl bg-white p-2 shadow-sm transition hover:scale-[1.02] hover:shadow-md"
+          >
+            <QRCodeSVG
+              value={COMMUNITY_URL}
+              size={112}
+              level="M"
+              bgColor="#ffffff"
+              fgColor="#0f172a"
+            />
+          </a>
         </div>
       </div>
 

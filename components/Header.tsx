@@ -6,6 +6,7 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import Flag from "./Flag";
 
 const NAV = [
   { label: "Career Map", href: "/#career-map" },
@@ -71,9 +72,10 @@ export default function Header() {
           <button
             type="button"
             onClick={openOnboarding}
-            className="hidden rounded-full border border-slate-200 px-3 py-1.5 text-xs font-medium text-slate-600 hover:border-[var(--accent)] hover:text-[var(--accent)] sm:inline-flex"
+            className="hidden items-center gap-1.5 rounded-full border border-slate-200 px-3 py-1.5 text-xs font-medium text-slate-600 hover:border-[var(--accent)] hover:text-[var(--accent)] sm:inline-flex"
           >
-            {theme.flag} {theme.short} · Đổi
+            <Flag countryCode={theme.countryCode} size="xs" alt={theme.name} />
+            {theme.short} · Đổi
           </button>
           <a
             href="#signup"
@@ -128,8 +130,13 @@ export default function Header() {
                     <span className="block text-sm font-bold text-slate-900">
                       Trạm Dừng
                     </span>
-                    <span className="block text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">
-                      {theme.flag} {theme.name}
+                    <span className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">
+                      <Flag
+                        countryCode={theme.countryCode}
+                        size="xs"
+                        alt={theme.name}
+                      />
+                      {theme.name}
                     </span>
                   </span>
                 </div>
@@ -171,7 +178,11 @@ export default function Header() {
                     className="flex w-full items-center justify-between rounded-xl border border-slate-200 px-3 py-3 text-sm font-medium text-slate-700 hover:border-[var(--accent)] hover:text-[var(--accent)]"
                   >
                     <span className="flex items-center gap-2">
-                      <span className="text-base">{theme.flag}</span>
+                      <Flag
+                        countryCode={theme.countryCode}
+                        size="sm"
+                        alt={theme.name}
+                      />
                       Đổi chuyên ngành
                     </span>
                     <span className="text-xs font-semibold text-slate-400">

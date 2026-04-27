@@ -5,15 +5,17 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 import { LANGUAGES } from "@/lib/languages";
 import { ROADMAPS, type Milestone } from "@/lib/roadmaps";
+import RoadmapChart from "./RoadmapChart";
+import Flag from "./Flag";
 
 function DetailPanel({
   milestone,
   themeName,
-  themeFlag,
+  themeCountryCode,
 }: {
   milestone: Milestone;
   themeName: string;
-  themeFlag: string;
+  themeCountryCode: string;
 }) {
   return (
     <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6 lg:p-8">
@@ -26,7 +28,12 @@ function DetailPanel({
             {milestone.label}
           </h3>
         </div>
-        <span className="flex-shrink-0 text-2xl sm:text-3xl">{themeFlag}</span>
+        <Flag
+          countryCode={themeCountryCode}
+          size="lg"
+          alt={themeName}
+          className="flex-shrink-0"
+        />
       </div>
 
       <div className="mt-5 grid gap-3 sm:gap-4 md:grid-cols-2">
@@ -103,17 +110,27 @@ export default function Roadmap() {
                     setLanguage(l.key);
                     setActiveIdx(0);
                   }}
-                  className={`flex-shrink-0 rounded-full border px-2.5 py-1 text-xs font-medium transition ${
+                  className={`inline-flex flex-shrink-0 items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium transition ${
                     l.key === language
                       ? "border-[var(--accent)] bg-[var(--accent)] text-white"
                       : "border-slate-200 bg-white text-slate-600 hover:border-slate-400"
                   }`}
                 >
-                  {l.flag} {l.short}
+                  <Flag countryCode={l.countryCode} size="xs" alt={l.name} />
+                  {l.short}
                 </button>
               ))}
             </div>
           </div>
+        </div>
+
+        {/* Decorative chart */}
+        <div className="mt-8">
+          <RoadmapChart
+            milestones={milestones}
+            activeIdx={activeIdx}
+            onSelect={setActiveIdx}
+          />
         </div>
 
         {/* MOBILE: accordion — milestone + panel inline */}
@@ -180,7 +197,7 @@ export default function Roadmap() {
                           <DetailPanel
                             milestone={m}
                             themeName={theme.name}
-                            themeFlag={theme.flag}
+                            themeCountryCode={theme.countryCode}
                           />
                         </div>
                       </motion.div>
@@ -255,7 +272,7 @@ export default function Roadmap() {
               <DetailPanel
                 milestone={active}
                 themeName={theme.name}
-                themeFlag={theme.flag}
+                themeCountryCode={theme.countryCode}
               />
             </motion.div>
           </AnimatePresence>
