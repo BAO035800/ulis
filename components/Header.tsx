@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
@@ -40,12 +41,14 @@ export default function Header() {
     <header className="sticky top-0 z-40 border-b border-slate-200/70 bg-white/85 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
         <Link href="/" className="flex min-w-0 items-center gap-2.5">
-          <span
-            className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl text-base font-bold text-white shadow-md"
-            style={{ background: theme.accent }}
-          >
-            TD
-          </span>
+          <Image
+            src="/logo-square.png"
+            alt="Trạm Dừng Hướng Nghiệp"
+            width={40}
+            height={40}
+            priority
+            className="h-10 w-10 flex-shrink-0 rounded-xl object-contain"
+          />
           <span className="min-w-0 leading-tight">
             <span className="block truncate text-sm font-bold text-slate-900">
               Trạm Dừng Hướng Nghiệp
@@ -114,12 +117,13 @@ export default function Header() {
             >
               <div className="flex items-center justify-between border-b border-slate-200 px-5 py-4">
                 <div className="flex items-center gap-2.5">
-                  <span
-                    className="flex h-9 w-9 items-center justify-center rounded-xl text-sm font-bold text-white"
-                    style={{ background: theme.accent }}
-                  >
-                    TD
-                  </span>
+                  <Image
+                    src="/logo-square.png"
+                    alt="Trạm Dừng"
+                    width={36}
+                    height={36}
+                    className="h-9 w-9 flex-shrink-0 rounded-xl object-contain"
+                  />
                   <span className="leading-tight">
                     <span className="block text-sm font-bold text-slate-900">
                       Trạm Dừng

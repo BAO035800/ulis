@@ -1,20 +1,14 @@
 "use client";
-
 import Link from "next/link";
+import Image from "next/image";
 import { QRCodeSVG } from "qrcode.react";
-import {
-  ArrowRight,
-  Briefcase,
-  Camera,
-  FileBadge,
-  Mail,
-  MapPin,
-  MessageSquare,
-  Music2,
-  Phone,
-  PlaySquare,
-} from "lucide-react";
+import { ArrowRight, FileBadge, Mail, MapPin, Phone } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import {
+  FacebookIcon,
+  InstagramIcon,
+  TikTokIcon,
+} from "./SocialIcons";
 
 const COMMUNITY_URL = "https://tramdung.vn/community";
 
@@ -22,11 +16,9 @@ export default function Footer() {
   const { theme } = useLanguage();
 
   const socials = [
-    { name: "Facebook", Icon: MessageSquare, href: "#" },
-    { name: "Instagram", Icon: Camera, href: "#" },
-    { name: "TikTok", Icon: Music2, href: "#" },
-    { name: "YouTube", Icon: PlaySquare, href: "#" },
-    { name: "LinkedIn", Icon: Briefcase, href: "#" },
+    { name: "Facebook", Icon: FacebookIcon, href: "#" },
+    { name: "Instagram", Icon: InstagramIcon, href: "#" },
+    { name: "TikTok", Icon: TikTokIcon, href: "#" },
   ];
 
   return (
@@ -64,11 +56,14 @@ export default function Footer() {
       <div className="mx-auto grid max-w-6xl gap-10 px-6 py-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div>
           <div className="flex items-center gap-2.5">
-            <span
-              className="flex h-10 w-10 items-center justify-center rounded-xl text-base font-bold text-white"
-              style={{ background: theme.accent }}
-            >
-              TD
+            <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-white p-1 shadow-sm">
+              <Image
+                src="/logo-square.png"
+                alt="Trạm Dừng Hướng Nghiệp"
+                width={36}
+                height={36}
+                className="h-full w-full object-contain"
+              />
             </span>
             <div>
               <p className="text-base font-bold text-white">
@@ -128,8 +123,8 @@ export default function Footer() {
               <Mail className="mt-0.5 h-4 w-4 flex-shrink-0 text-slate-400" />
               <span>
                 <span className="block text-xs text-slate-500">Email</span>
-                <a href="mailto:hello@tramdung.vn" className="hover:text-white">
-                  hello@tramdung.vn
+                <a href="mailto:tramhuongnghiep@gmail.com" className="hover:text-white">
+                  tramhuongnghiep@gmail.com
                 </a>
               </span>
             </li>
@@ -138,7 +133,7 @@ export default function Footer() {
               <span>
                 <span className="block text-xs text-slate-500">Hotline</span>
                 <a href="tel:+842466668888" className="hover:text-white">
-                  +84 24 6666 8888
+                  +84 357537002
                 </a>
               </span>
             </li>
@@ -146,7 +141,7 @@ export default function Footer() {
               <MapPin className="mt-0.5 h-4 w-4 flex-shrink-0 text-slate-400" />
               <span>
                 <span className="block text-xs text-slate-500">Địa chỉ</span>
-                <span>ULIS – ĐHQGHN, Phạm Văn Đồng, Hà Nội</span>
+                <span> Số 2 Phạm Văn Đồng, Cầu Giấy, Hà Nội </span>
               </span>
             </li>
           </ul>

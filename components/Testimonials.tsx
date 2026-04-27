@@ -3,14 +3,14 @@
 const TESTIMONIALS = [
   {
     name: "Phạm Khánh Linh",
-    role: "Cựu SV ngôn ngữ Nhật · IT Comtor tại FPT Software",
+    role: "Cựu SV truờng đại học ngoại ngữ",
     avatar: "🌸",
     quote:
       "Trước mình chỉ nghĩ học tiếng Nhật là đi dạy hoặc dịch. Career Map của Trạm Dừng cho mình thấy nghề Comtor — vừa hợp tính cách, vừa trả lương trong hệ IT.",
   },
   {
     name: "Trần Minh Quang",
-    role: "Cựu SV ngôn ngữ Trung · Sourcing tại Shopee",
+    role: "Cựu SV truờng đại học ngoại ngữ",
     avatar: "🐉",
     quote:
       "Lộ trình theo HSK cực rõ ràng. Mỗi mốc mình đều biết cần học thêm Incoterms, đàm phán… để không bị mắc kẹt ở mảng dịch thuật.",
