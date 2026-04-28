@@ -7,6 +7,7 @@ import { ArrowRight, Map as MapIcon, Sparkles } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { LANGUAGES } from "@/lib/languages";
 import HeroScene from "./HeroScene";
+import HeroBackground from "./HeroBackground";
 import Flag from "./Flag";
 
 export default function Hero() {
@@ -48,6 +49,9 @@ export default function Hero() {
           className="absolute right-1/3 top-40 h-40 w-40 rounded-full opacity-15 blur-3xl"
         />
       </div>
+
+      {/* Decorative background — dot grid, route line, multilingual floating chars */}
+      <HeroBackground />
 
       <motion.div
         style={{ opacity: heroOpacity }}

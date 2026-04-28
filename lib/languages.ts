@@ -21,6 +21,8 @@ export type LanguageTheme = {
   accentInk: string;
   heroTagline: string;
   heroHighlight: string;
+  /** Representative chars/words for the hero background ambience */
+  bgChars: string[];
 };
 
 export const LANGUAGES: LanguageTheme[] = [
@@ -35,6 +37,7 @@ export const LANGUAGES: LanguageTheme[] = [
     accentInk: "#0b1f5c",
     heroTagline: "Global English – Mở cánh cửa thị trường lao động quốc tế.",
     heroHighlight: "IELTS · Business English · Localization",
+    bgChars: ["A", "Z", "&", "Hello", "Cheers", "Thanks", "Goodbye", "Welcome", "OK"],
   },
   {
     key: "ja",
@@ -47,6 +50,7 @@ export const LANGUAGES: LanguageTheme[] = [
     accentInk: "#5b0a1f",
     heroTagline: "Nihongo – Cầu nối giữa văn hoá và công nghệ Nhật Bản.",
     heroHighlight: "JLPT N3→N1 · IT Comtor · Thương mại Nhật",
+    bgChars: ["あ", "い", "う", "日本", "桜", "こんにちは", "ありがとう", "頑張", "未来"],
   },
   {
     key: "ko",
@@ -59,6 +63,7 @@ export const LANGUAGES: LanguageTheme[] = [
     accentInk: "#2e1065",
     heroTagline: "Hangugeo – Khai phá cơ hội từ làn sóng Hallyu & Hàn Quốc.",
     heroHighlight: "TOPIK 3→6 · K-Business · Localization",
+    bgChars: ["한", "가", "나", "다", "사랑", "안녕", "감사합니다", "힘내", "꿈"],
   },
   {
     key: "zh",
@@ -71,6 +76,7 @@ export const LANGUAGES: LanguageTheme[] = [
     accentInk: "#5c0a0a",
     heroTagline: "Zhongwen – Đòn bẩy bước vào thị trường tỷ dân.",
     heroHighlight: "HSK 4→6 · Sourcing · Thương mại quốc tế",
+    bgChars: ["中", "你", "好", "谢谢", "你好", "未来", "学习", "汉语", "梦"],
   },
   {
     key: "de",
@@ -83,6 +89,7 @@ export const LANGUAGES: LanguageTheme[] = [
     accentInk: "#0a3a36",
     heroTagline: "Deutsch – Cửa ngõ vào kỹ thuật & dual system của châu Âu.",
     heroHighlight: "A1→C2 · Fachsprache · Cơ hội định cư Đức",
+    bgChars: ["Ä", "Ö", "Ü", "ß", "Hallo", "Danke", "Guten Tag", "Bitte", "Zukunft"],
   },
   {
     key: "fr",
@@ -95,6 +102,7 @@ export const LANGUAGES: LanguageTheme[] = [
     accentInk: "#0b1f5c",
     heroTagline: "Français – Ngôn ngữ ngoại giao, văn hoá và sáng tạo.",
     heroHighlight: "DELF/DALF · Tourism · Diplomatie",
+    bgChars: ["É", "À", "Ç", "Œ", "Bonjour", "Merci", "Salut", "Avenir", "Liberté"],
   },
   {
     key: "ru",
@@ -107,6 +115,7 @@ export const LANGUAGES: LanguageTheme[] = [
     accentInk: "#082f49",
     heroTagline: "Русский – Cơ hội trong năng lượng, kỹ thuật và Á-Âu.",
     heroHighlight: "TRKI · Kỹ thuật · Năng lượng",
+    bgChars: ["Д", "Ж", "Я", "Ы", "Привет", "Спасибо", "Друг", "Будущее", "Мир"],
   },
   {
     key: "ar",
@@ -119,6 +128,7 @@ export const LANGUAGES: LanguageTheme[] = [
     accentInk: "#052e16",
     heroTagline: "العربية – Mở lối vào thị trường Trung Đông & ngoại giao.",
     heroHighlight: "MSA · Diplomacy · Media",
+    bgChars: ["ا", "ب", "م", "ع", "مرحبا", "شكرا", "صديق", "مستقبل", "سلام"],
   },
 ];
 
