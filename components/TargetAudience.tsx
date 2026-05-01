@@ -17,6 +17,7 @@ type Profile = {
   title: string;
   desc: string;
   photoSeed: string;
+  photo?: string;
 };
 
 const PROFILES: Profile[] = [
@@ -25,24 +26,28 @@ const PROFILES: Profile[] = [
     title: "Tân sinh viên ngoại ngữ",
     desc: "Năm 1 – 2, đang mông lung tìm hướng đi phù hợp với tính cách và năng lực thật của mình.",
     photoSeed: "ulis-fresher-spring",
+    photo: "/1.jpeg",
   },
   {
     Icon: Target,
     title: "Sinh viên đã có nền tảng",
     desc: "Năm 3 – 4 hoặc đã có chứng chỉ, cần lộ trình kỹ năng nghề & lộ trình thi chứng chỉ chuyên sâu.",
     photoSeed: "ulis-junior-study",
+    photo: "/2.jpeg",
   },
   {
     Icon: Compass,
     title: "Sinh viên muốn rẽ ngang",
     desc: "Học ngôn ngữ nhưng quan tâm đến IT Comtor, Sourcing, Project Coordinator, Localization…",
     photoSeed: "ulis-pivot-tech",
+    photo: "/3.jpeg",
   },
   {
     Icon: GraduationCap,
     title: "Sinh viên năm cuối / mới ra trường",
     desc: "Cần định vị bản thân, hoàn thiện hồ sơ song ngữ và chuẩn bị phỏng vấn doanh nghiệp.",
     photoSeed: "ulis-senior-graduation",
+    photo: "/4.jpeg",
   },
 ];
 
@@ -95,7 +100,7 @@ export default function TargetAudience() {
               >
                 <div className="relative h-36 overflow-hidden bg-slate-100">
                   <Image
-                    src={`https://picsum.photos/seed/${p.photoSeed}/640/360`}
+                    src={p.photo ?? `https://picsum.photos/seed/${p.photoSeed}/640/360`}
                     alt=""
                     width={640}
                     height={360}
