@@ -16,26 +16,38 @@ export default function SectionProgressDots() {
   const [active, setActive] = useState("hero");
 
   useEffect(() => {
-    const elements = SECTIONS.map((s) => document.getElementById(s.id)).filter(
-      (el): el is HTMLElement => Boolean(el),
+    const items = SECTIONS.map((s) => ({
+      id: s.id,
+      el: document.getElementById(s.id),
+    })).filter(
+      (x): x is { id: string; el: HTMLElement } => Boolean(x.el),
     );
+    if (items.length === 0) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        // Pick the entry closest to viewport center
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-        if (visible[0]) setActive(visible[0].target.id);
-      },
-      {
-        rootMargin: "-40% 0px -40% 0px",
-        threshold: [0, 0.1, 0.5, 1],
-      },
-    );
+    let raf = 0;
+    const compute = () => {
+      raf = 0;
+      const line = window.innerHeight * 0.35;
+      let current = items[0].id;
+      for (const { id, el } of items) {
+        const top = el.getBoundingClientRect().top;
+        if (top - line <= 1) current = id;
+      }
+      setActive(current);
+    };
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(compute);
+    };
 
-    elements.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
+    compute();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
   }, []);
 
   return (
