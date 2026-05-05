@@ -8,14 +8,14 @@ import Reveal from "./Reveal";
 const TESTIMONIALS = [
   {
     name: "Phạm Khánh Linh",
-    role: "Cựu SV trường đại học ngoại ngữ",
+    role: "CỰU SV TRƯỜNG ĐẠI HỌC NGOẠI NGỮ",
     avatarSeed: "linh-pham-portrait",
     quote:
       "Trước mình chỉ nghĩ học tiếng Nhật là đi dạy hoặc dịch. Career Map của Trạm Dừng cho mình thấy nghề Comtor — vừa hợp tính cách, vừa trả lương trong hệ IT.",
   },
   {
     name: "Trần Minh Quang",
-    role: "Cựu SV trường đại học ngoại ngữ",
+    role: "CỰU SV TRƯỜNG ĐẠI HỌC NGOẠI NGỮ",
     avatarSeed: "quang-tran-portrait",
     quote:
       "Lộ trình theo HSK cực rõ ràng. Mỗi mốc mình đều biết cần học thêm Incoterms, đàm phán… để không bị mắc kẹt ở mảng dịch thuật.",
