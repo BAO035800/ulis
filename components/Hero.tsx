@@ -55,7 +55,7 @@ export default function Hero() {
 
       <motion.div
         style={{ opacity: heroOpacity }}
-        className="relative mx-auto grid max-w-6xl gap-12 px-6 lg:grid-cols-[1.15fr_1fr] lg:items-center"
+        className="relative mx-auto grid max-w-6xl gap-12 px-6 lg:grid-cols-[1fr_1.25fr] lg:items-center"
       >
         <div>
           <motion.span
@@ -72,12 +72,12 @@ export default function Hero() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45 }}
-            className="mt-5 text-4xl font-bold leading-tight tracking-tight text-slate-900 sm:text-5xl lg:text-[3.4rem]"
+            className="mt-5 text-3xl font-bold leading-tight tracking-tight text-slate-900 sm:text-4xl lg:text-[2.4rem]"
           >
             Trạm Dừng{" "}
             <span className="text-[var(--accent)]">Hướng Nghiệp</span>
             <br />
-            <span className="text-2xl font-medium text-slate-600 sm:text-3xl">
+            <span className="text-xl font-medium text-slate-600 sm:text-2xl">
               Nơi bắt đầu hành trình sự nghiệp của bạn.
             </span>
           </motion.h1>
@@ -96,7 +96,7 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.15, duration: 0.45 }}
-            className="mt-5 max-w-xl text-base leading-7 text-slate-600 sm:text-lg"
+            className="mt-4 max-w-xl text-sm leading-6 text-slate-600 sm:text-base"
           >
             Cung cấp bộ công cụ <strong>“dẫn đường” từng bước</strong>, giúp bạn
             thấu hiểu bản thân, vạch ra lộ trình học tập và kết nối với cơ hội
